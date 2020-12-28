@@ -1,6 +1,7 @@
-import { VantComponent } from '../common/component';
-import { touch } from '../mixins/touch';
-import { isDef, addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {touch} from '../mixins/touch';
+import {addUnit, isDef} from '../common/utils';
+
 VantComponent({
     mixins: [touch],
     classes: ['nav-class', 'tab-class', 'tab-active-class', 'line-class'],
@@ -16,9 +17,9 @@ VantComponent({
             this.children = this.children
                 .filter((child) => child !== target)
                 .map((child, index) => {
-                child.index = index;
-                return child;
-            });
+                    child.index = index;
+                    return child;
+                });
             this.updateTabs();
         }
     },
@@ -117,7 +118,7 @@ VantComponent({
     },
     methods: {
         updateTabs() {
-            const { children = [], data } = this;
+            const {children = [], data} = this;
             this.setData({
                 tabs: children.map((child) => child.data),
                 scrollable: this.children.length > data.swipeThreshold || !data.ellipsis
@@ -125,7 +126,7 @@ VantComponent({
             this.setCurrentIndexByName(this.getCurrentName() || data.active);
         },
         trigger(eventName) {
-            const { currentIndex } = this.data;
+            const {currentIndex} = this.data;
             const child = this.children[currentIndex];
             if (!isDef(child)) {
                 return;
@@ -137,12 +138,11 @@ VantComponent({
             });
         },
         onTap(event) {
-            const { index } = event.currentTarget.dataset;
+            const {index} = event.currentTarget.dataset;
             const child = this.children[index];
             if (child.data.disabled) {
                 this.trigger('disabled');
-            }
-            else {
+            } else {
                 this.setCurrentIndex(index);
                 wx.nextTick(() => {
                     this.trigger('click');
@@ -151,14 +151,14 @@ VantComponent({
         },
         // correct the index of active tab
         setCurrentIndexByName(name) {
-            const { children = [] } = this;
+            const {children = []} = this;
             const matched = children.filter((child) => child.getComputedName() === name);
             if (matched.length) {
                 this.setCurrentIndex(matched[0].index);
             }
         },
         setCurrentIndex(currentIndex) {
-            const { data, children = [] } = this;
+            const {data, children = []} = this;
             if (!isDef(currentIndex) ||
                 currentIndex >= children.length ||
                 currentIndex < 0) {
@@ -174,7 +174,7 @@ VantComponent({
                 return;
             }
             const shouldEmitChange = data.currentIndex !== null;
-            this.setData({ currentIndex });
+            this.setData({currentIndex});
             wx.nextTick(() => {
                 this.setLine();
                 this.setTrack();
@@ -195,7 +195,7 @@ VantComponent({
             if (this.data.type !== 'line') {
                 return;
             }
-            const { color, duration, currentIndex, lineWidth, lineHeight } = this.data;
+            const {color, duration, currentIndex, lineWidth, lineHeight} = this.data;
             this.getRect('.van-tab', true).then((rects = []) => {
                 const rect = rects[currentIndex];
                 if (rect == null) {
@@ -225,7 +225,7 @@ VantComponent({
             });
         },
         setTrack() {
-            const { animated, duration, currentIndex } = this.data;
+            const {animated, duration, currentIndex} = this.data;
             if (!animated) {
                 return;
             }
@@ -239,7 +239,7 @@ VantComponent({
         },
         // scroll active tab into view
         scrollIntoView() {
-            const { currentIndex, scrollable } = this.data;
+            const {currentIndex, scrollable} = this.data;
             if (!scrollable) {
                 return;
             }
@@ -273,14 +273,13 @@ VantComponent({
         onTouchEnd() {
             if (!this.data.swipeable)
                 return;
-            const { tabs, currentIndex } = this.data;
-            const { direction, deltaX, offsetX } = this;
+            const {tabs, currentIndex} = this.data;
+            const {direction, deltaX, offsetX} = this;
             const minSwipeDistance = 50;
             if (direction === 'horizontal' && offsetX >= minSwipeDistance) {
                 if (deltaX > 0 && currentIndex !== 0) {
                     this.setCurrentIndex(currentIndex - 1);
-                }
-                else if (deltaX < 0 && currentIndex !== tabs.length - 1) {
+                } else if (deltaX < 0 && currentIndex !== tabs.length - 1) {
                     this.setCurrentIndex(currentIndex + 1);
                 }
             }

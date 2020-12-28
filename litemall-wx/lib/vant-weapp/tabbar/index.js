@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     relation: {
         name: 'tabbar-item',
@@ -48,7 +49,7 @@ VantComponent({
     },
     methods: {
         updateChildren() {
-            const { children } = this;
+            const {children} = this;
             if (!Array.isArray(children) || !children.length) {
                 return Promise.resolve();
             }

@@ -1,12 +1,15 @@
-import { VantComponent } from '../common/component';
-import { addUnit, isDef } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit, isDef} from '../common/utils';
+
 const LONG_PRESS_START_TIME = 600;
 const LONG_PRESS_INTERVAL = 200;
+
 // add num and avoid float number
 function add(num1, num2) {
     const cardinal = Math.pow(10, 10);
     return Math.round((num1 + num2) * cardinal) / cardinal;
 }
+
 VantComponent({
     field: true,
     classes: ['input-class', 'plus-class', 'minus-class'],
@@ -52,7 +55,7 @@ VantComponent({
             }
             const newValue = this.range(value);
             if (typeof newValue === 'number' && +this.data.value !== newValue) {
-                this.setData({ value: newValue });
+                this.setData({value: newValue});
             }
         },
         inputWidth() {
@@ -105,11 +108,11 @@ VantComponent({
             return value;
         },
         onInput(event) {
-            const { value = '' } = event.detail || {};
+            const {value = ''} = event.detail || {};
             this.triggerInput(value);
         },
         onChange() {
-            const { type } = this;
+            const {type} = this;
             if (this.isDisabled(type)) {
                 this.$emit('overlimit', type);
                 return;
@@ -126,13 +129,13 @@ VantComponent({
             }, LONG_PRESS_INTERVAL);
         },
         onTap(event) {
-            const { type } = event.currentTarget.dataset;
+            const {type} = event.currentTarget.dataset;
             this.type = type;
             this.onChange();
         },
         onTouchStart(event) {
             clearTimeout(this.longPressTimer);
-            const { type } = event.currentTarget.dataset;
+            const {type} = event.currentTarget.dataset;
             this.type = type;
             this.isLongPress = false;
             this.longPressTimer = setTimeout(() => {

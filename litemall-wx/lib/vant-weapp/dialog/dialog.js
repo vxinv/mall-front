@@ -1,8 +1,10 @@
 let queue = [];
+
 function getContext() {
     const pages = getCurrentPages();
     return pages[pages.length - 1];
 }
+
 const Dialog = options => {
     options = Object.assign(Object.assign({}, Dialog.currentOptions), options);
     return new Promise((resolve, reject) => {
@@ -11,10 +13,9 @@ const Dialog = options => {
         delete options.context;
         delete options.selector;
         if (dialog) {
-            dialog.setData(Object.assign({ onCancel: reject, onConfirm: resolve }, options));
+            dialog.setData(Object.assign({onCancel: reject, onConfirm: resolve}, options));
             queue.push(dialog);
-        }
-        else {
+        } else {
             console.warn('未找到 van-dialog 节点，请确认 selector 及 context 是否正确');
         }
     });
@@ -41,7 +42,7 @@ Dialog.defaultOptions = {
     confirmButtonOpenType: ''
 };
 Dialog.alert = Dialog;
-Dialog.confirm = options => Dialog(Object.assign({ showCancelButton: true }, options));
+Dialog.confirm = options => Dialog(Object.assign({showCancelButton: true}, options));
 Dialog.close = () => {
     queue.forEach(dialog => {
         dialog.close();

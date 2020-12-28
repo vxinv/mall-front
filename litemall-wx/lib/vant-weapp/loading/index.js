@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     props: {
         color: String,

@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 20));
 VantComponent({
     classes: ['title-class', 'content-class'],
@@ -35,21 +36,21 @@ VantComponent({
         this.updateExpanded()
             .then(nextTick)
             .then(() => {
-            const data = { transition: true };
-            if (this.data.expanded) {
-                data.contentHeight = 'auto';
-            }
-            this.setData(data);
-        });
+                const data = {transition: true};
+                if (this.data.expanded) {
+                    data.contentHeight = 'auto';
+                }
+                this.setData(data);
+            });
     },
     methods: {
         updateExpanded() {
             if (!this.parent) {
                 return Promise.resolve();
             }
-            const { value, accordion } = this.parent.data;
-            const { children = [] } = this.parent;
-            const { name } = this.data;
+            const {value, accordion} = this.parent.data;
+            const {children = []} = this.parent;
+            const {name} = this.data;
             const index = children.indexOf(this);
             const currentName = name == null ? index : name;
             const expanded = accordion
@@ -59,28 +60,28 @@ VantComponent({
             if (expanded !== this.data.expanded) {
                 stack.push(this.updateStyle(expanded));
             }
-            stack.push(this.set({ index, expanded }));
+            stack.push(this.set({index, expanded}));
             return Promise.all(stack);
         },
         updateStyle(expanded) {
             return this.getRect('.van-collapse-item__content')
                 .then((rect) => rect.height)
                 .then((height) => {
-                if (expanded) {
-                    return this.set({
-                        contentHeight: height ? `${height}px` : 'auto'
-                    });
-                }
-                return this.set({ contentHeight: `${height}px` })
-                    .then(nextTick)
-                    .then(() => this.set({ contentHeight: 0 }));
-            });
+                    if (expanded) {
+                        return this.set({
+                            contentHeight: height ? `${height}px` : 'auto'
+                        });
+                    }
+                    return this.set({contentHeight: `${height}px`})
+                        .then(nextTick)
+                        .then(() => this.set({contentHeight: 0}));
+                });
         },
         onClick() {
             if (this.data.disabled) {
                 return;
             }
-            const { name, expanded } = this.data;
+            const {name, expanded} = this.data;
             const index = this.parent.children.indexOf(this);
             const currentName = name == null ? index : name;
             this.parent.switch(currentName, !expanded);

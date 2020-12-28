@@ -1,6 +1,7 @@
-import { behavior } from './behavior';
+import {behavior} from './behavior';
+
 export function observe(vantOptions, options) {
-    const { watch } = vantOptions;
+    const {watch} = vantOptions;
     options.behaviors.push(behavior);
     if (watch) {
         const props = options.properties || {};
@@ -8,7 +9,7 @@ export function observe(vantOptions, options) {
             if (key in props) {
                 let prop = props[key];
                 if (prop === null || !('type' in prop)) {
-                    prop = { type: prop };
+                    prop = {type: prop};
                 }
                 prop.observer = watch[key];
                 props[key] = prop;

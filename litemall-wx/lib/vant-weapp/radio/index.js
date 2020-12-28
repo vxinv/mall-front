@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     field: true,
     relation: {
@@ -51,7 +52,7 @@ VantComponent({
             this.emitChange(this.data.name);
         },
         onClickLabel() {
-            const { disabled, labelDisabled, name } = this.data;
+            const {disabled, labelDisabled, name} = this.data;
             if (!disabled && !labelDisabled) {
                 this.emitChange(name);
             }

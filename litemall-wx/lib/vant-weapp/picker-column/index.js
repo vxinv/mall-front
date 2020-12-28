@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { isObj, range } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {isObj, range} from '../common/utils';
+
 const DEFAULT_DURATION = 200;
 VantComponent({
     classes: ['active-class'],
@@ -26,7 +27,7 @@ VantComponent({
         currentIndex: 0
     },
     created() {
-        const { defaultIndex, initialOptions } = this.data;
+        const {defaultIndex, initialOptions} = this.data;
         this.set({
             currentIndex: defaultIndex,
             options: initialOptions
@@ -51,26 +52,26 @@ VantComponent({
             });
         },
         onTouchMove(event) {
-            const { data } = this;
+            const {data} = this;
             const deltaY = event.touches[0].clientY - data.startY;
             this.setData({
                 offset: range(data.startOffset + deltaY, -(this.getCount() * data.itemHeight), data.itemHeight)
             });
         },
         onTouchEnd() {
-            const { data } = this;
+            const {data} = this;
             if (data.offset !== data.startOffset) {
-                this.setData({ duration: DEFAULT_DURATION });
+                this.setData({duration: DEFAULT_DURATION});
                 const index = range(Math.round(-data.offset / data.itemHeight), 0, this.getCount() - 1);
                 this.setIndex(index, true);
             }
         },
         onClickItem(event) {
-            const { index } = event.currentTarget.dataset;
+            const {index} = event.currentTarget.dataset;
             this.setIndex(index, true);
         },
         adjustIndex(index) {
-            const { data } = this;
+            const {data} = this;
             const count = this.getCount();
             index = range(index, 0, count);
             for (let i = index; i < count; i++) {
@@ -86,24 +87,24 @@ VantComponent({
             return isObj(option) && option.disabled;
         },
         getOptionText(option) {
-            const { data } = this;
+            const {data} = this;
             return isObj(option) && data.valueKey in option
                 ? option[data.valueKey]
                 : option;
         },
         setIndex(index, userAction) {
-            const { data } = this;
+            const {data} = this;
             index = this.adjustIndex(index) || 0;
             const offset = -index * data.itemHeight;
             if (index !== data.currentIndex) {
-                return this.set({ offset, currentIndex: index }).then(() => {
+                return this.set({offset, currentIndex: index}).then(() => {
                     userAction && this.$emit('change', index);
                 });
             }
-            return this.set({ offset });
+            return this.set({offset});
         },
         setValue(value) {
-            const { options } = this.data;
+            const {options} = this.data;
             for (let i = 0; i < options.length; i++) {
                 if (this.getOptionText(options[i]) === value) {
                     return this.setIndex(i);
@@ -112,7 +113,7 @@ VantComponent({
             return Promise.resolve();
         },
         getValue() {
-            const { data } = this;
+            const {data} = this;
             return data.options[data.currentIndex];
         }
     }

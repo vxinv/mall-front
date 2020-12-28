@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { transition } from '../mixins/transition';
+import {VantComponent} from '../common/component';
+import {transition} from '../mixins/transition';
+
 VantComponent({
     classes: [
         'enter-class',
@@ -67,7 +68,7 @@ VantComponent({
             }
         },
         observeClass() {
-            const { transition, position } = this.data;
+            const {transition, position} = this.data;
             const updateData = {
                 name: transition || position
             };

@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { getSystemInfoSync } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {getSystemInfoSync} from '../common/utils';
+
 VantComponent({
     field: true,
     classes: ['input-class', 'right-icon-class'],
@@ -75,24 +76,24 @@ VantComponent({
     },
     methods: {
         onInput(event) {
-            const { value = '' } = event.detail || {};
-            this.setData({ value }, () => {
+            const {value = ''} = event.detail || {};
+            this.setData({value}, () => {
                 this.emitChange(value);
             });
         },
         onFocus(event) {
-            this.setData({ focused: true });
+            this.setData({focused: true});
             this.$emit('focus', event.detail);
         },
         onBlur(event) {
-            this.setData({ focused: false });
+            this.setData({focused: false});
             this.$emit('blur', event.detail);
         },
         onClickIcon() {
             this.$emit('click-icon');
         },
         onClear() {
-            this.setData({ value: '' }, () => {
+            this.setData({value: ''}, () => {
                 this.emitChange('');
                 this.$emit('clear', '');
             });

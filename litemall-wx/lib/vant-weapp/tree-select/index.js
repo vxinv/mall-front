@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     classes: [
         'main-item-class',
@@ -39,7 +40,7 @@ VantComponent({
     methods: {
         // 当一个子项被选择时
         onSelectItem(event) {
-            const { item } = event.currentTarget.dataset;
+            const {item} = event.currentTarget.dataset;
             const isArray = Array.isArray(this.data.activeId);
             // 判断有没有超出右侧选择的最大数
             const isOverMax = isArray && this.data.activeId.length >= this.data.max;
@@ -56,14 +57,14 @@ VantComponent({
             const index = event.detail;
             const item = this.data.items[index];
             if (!item.disabled) {
-                this.$emit('click-nav', { index });
+                this.$emit('click-nav', {index});
             }
         },
         // 更新子项列表
         updateSubItems() {
-            const { items, mainActiveIndex } = this.data;
-            const { children = [] } = items[mainActiveIndex] || {};
-            return this.set({ subItems: children });
+            const {items, mainActiveIndex} = this.data;
+            const {children = []} = items[mainActiveIndex] || {};
+            return this.set({subItems: children});
         },
         updateHeight() {
             this.setData({

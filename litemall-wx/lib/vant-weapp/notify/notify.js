@@ -1,4 +1,5 @@
-import { WHITE } from '../common/color';
+import {WHITE} from '../common/color';
+
 const defaultOptions = {
     selector: '#van-notify',
     type: 'danger',
@@ -7,17 +8,23 @@ const defaultOptions = {
     duration: 3000,
     zIndex: 110,
     color: WHITE,
-    onClick: () => { },
-    onOpened: () => { },
-    onClose: () => { }
+    onClick: () => {
+    },
+    onOpened: () => {
+    },
+    onClose: () => {
+    }
 };
+
 function parseOptions(message) {
-    return typeof message === 'string' ? { message } : message;
+    return typeof message === 'string' ? {message} : message;
 }
+
 function getContext() {
     const pages = getCurrentPages();
     return pages[pages.length - 1];
 }
+
 export default function Notify(options) {
     options = Object.assign({}, defaultOptions, parseOptions(options));
     const context = options.context || getContext();

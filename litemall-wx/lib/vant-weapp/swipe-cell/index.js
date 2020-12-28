@@ -1,6 +1,7 @@
-import { VantComponent } from '../common/component';
-import { touch } from '../mixins/touch';
-import { range } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {touch} from '../mixins/touch';
+import {range} from '../common/utils';
+
 const THRESHOLD = 0.3;
 let ARRAY = [];
 VantComponent({
@@ -33,7 +34,7 @@ VantComponent({
     },
     methods: {
         open(position) {
-            const { leftWidth, rightWidth } = this.data;
+            const {leftWidth, rightWidth} = this.data;
             const offset = position === 'left' ? leftWidth : -rightWidth;
             this.swipeMove(offset);
             this.$emit('open', {
@@ -60,18 +61,16 @@ VantComponent({
             });
         },
         swipeLeaveTransition() {
-            const { leftWidth, rightWidth } = this.data;
-            const { offset } = this;
+            const {leftWidth, rightWidth} = this.data;
+            const {offset} = this;
             if (rightWidth > 0 && -offset > rightWidth * THRESHOLD) {
                 this.open('right');
-            }
-            else if (leftWidth > 0 && offset > leftWidth * THRESHOLD) {
+            } else if (leftWidth > 0 && offset > leftWidth * THRESHOLD) {
                 this.open('left');
-            }
-            else {
+            } else {
                 this.swipeMove(0);
             }
-            this.setData({ catchMove: false });
+            this.setData({catchMove: false});
         },
         startDrag(event) {
             if (this.data.disabled) {
@@ -80,7 +79,8 @@ VantComponent({
             this.startOffset = this.offset;
             this.touchStart(event);
         },
-        noop() { },
+        noop() {
+        },
         onDrag(event) {
             if (this.data.disabled) {
                 return;
@@ -91,7 +91,7 @@ VantComponent({
             }
             this.dragging = true;
             ARRAY.filter(item => item !== this).forEach(item => item.close());
-            this.setData({ catchMove: true });
+            this.setData({catchMove: true});
             this.swipeMove(this.startOffset + this.deltaX);
         },
         endDrag() {
@@ -102,7 +102,7 @@ VantComponent({
             this.swipeLeaveTransition();
         },
         onClick(event) {
-            const { key: position = 'outside' } = event.currentTarget.dataset;
+            const {key: position = 'outside'} = event.currentTarget.dataset;
             this.$emit('click', position);
             if (!this.offset) {
                 return;
@@ -113,8 +113,7 @@ VantComponent({
                     instance: this,
                     name: this.data.name
                 });
-            }
-            else {
+            } else {
                 this.swipeMove(0);
             }
         }

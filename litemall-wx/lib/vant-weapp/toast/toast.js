@@ -1,4 +1,5 @@
-import { isObj } from '../common/utils';
+import {isObj} from '../common/utils';
+
 const defaultOptions = {
     type: 'text',
     mask: false,
@@ -13,13 +14,16 @@ const defaultOptions = {
 };
 let queue = [];
 let currentOptions = Object.assign({}, defaultOptions);
+
 function parseOptions(message) {
-    return isObj(message) ? message : { message };
+    return isObj(message) ? message : {message};
 }
+
 function getContext() {
     const pages = getCurrentPages();
     return pages[pages.length - 1];
 }
+
 function Toast(toastOptions) {
     const options = Object.assign(Object.assign({}, currentOptions), parseOptions(toastOptions));
     const context = options.context || getContext();
@@ -31,7 +35,7 @@ function Toast(toastOptions) {
     delete options.context;
     delete options.selector;
     toast.clear = () => {
-        toast.setData({ show: false });
+        toast.setData({show: false});
         if (options.onClose) {
             options.onClose();
         }
@@ -47,7 +51,8 @@ function Toast(toastOptions) {
     }
     return toast;
 }
-const createMethod = (type) => (options) => Toast(Object.assign({ type }, parseOptions(options)));
+
+const createMethod = (type) => (options) => Toast(Object.assign({type}, parseOptions(options)));
 Toast.loading = createMethod('loading');
 Toast.success = createMethod('success');
 Toast.fail = createMethod('fail');

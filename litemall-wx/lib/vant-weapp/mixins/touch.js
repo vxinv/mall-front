@@ -1,4 +1,5 @@
 const MIN_DISTANCE = 10;
+
 function getDirection(x, y) {
     if (x > y && x > MIN_DISTANCE) {
         return 'horizontal';
@@ -8,6 +9,7 @@ function getDirection(x, y) {
     }
     return '';
 }
+
 export const touch = Behavior({
     methods: {
         resetTouchStatus() {

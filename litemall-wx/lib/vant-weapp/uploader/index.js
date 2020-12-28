@@ -1,6 +1,7 @@
-import { VantComponent } from '../common/component';
-import { isImageFile } from './utils';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {isImageFile} from './utils';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     props: {
         disabled: Boolean,
@@ -58,9 +59,9 @@ VantComponent({
     },
     methods: {
         formatFileList() {
-            const { fileList = [], maxCount } = this.data;
-            const lists = fileList.map(item => (Object.assign(Object.assign({}, item), { isImage: typeof item.isImage === 'undefined' ? isImageFile(item) : item.isImage })));
-            this.setData({ lists, isInCount: lists.length < maxCount });
+            const {fileList = [], maxCount} = this.data;
+            const lists = fileList.map(item => (Object.assign(Object.assign({}, item), {isImage: typeof item.isImage === 'undefined' ? isImageFile(item) : item.isImage})));
+            this.setData({lists, isInCount: lists.length < maxCount});
         },
         setComputedPreviewSize(val) {
             this.setData({
@@ -70,8 +71,9 @@ VantComponent({
         startUpload() {
             if (this.data.disabled)
                 return;
-            const { name = '', capture = ['album', 'camera'], maxCount = 100, multiple = false, maxSize, accept, lists, useBeforeRead = false // 是否定义了 beforeRead
-             } = this.data;
+            const {
+                name = '', capture = ['album', 'camera'], maxCount = 100, multiple = false, maxSize, accept, lists, useBeforeRead = false // 是否定义了 beforeRead
+            } = this.data;
             let chooseFile = null;
             const newMaxCount = maxCount - lists.length;
             // 设置为只选择图片的时候使用 chooseImage 来实现
@@ -84,8 +86,7 @@ VantComponent({
                         fail: reject
                     });
                 });
-            }
-            else {
+            } else {
                 chooseFile = new Promise((resolve, reject) => {
                     wx.chooseMessageFile({
                         count: multiple ? newMaxCount : 1,
@@ -101,12 +102,11 @@ VantComponent({
                 if (file instanceof Array) {
                     const sizeEnable = file.every(item => item.size <= maxSize);
                     if (!sizeEnable) {
-                        this.$emit('oversize', { name });
+                        this.$emit('oversize', {name});
                         return;
                     }
-                }
-                else if (file.size > maxSize) {
-                    this.$emit('oversize', { name });
+                } else if (file.size > maxSize) {
+                    this.$emit('oversize', {name});
                     return;
                 }
                 // 触发上传之前的钩子函数
@@ -117,19 +117,18 @@ VantComponent({
                         callback: (result) => {
                             if (result) {
                                 // 开始上传
-                                this.$emit('after-read', { file, name });
+                                this.$emit('after-read', {file, name});
                             }
                         }
                     });
-                }
-                else {
-                    this.$emit('after-read', { file, name });
+                } else {
+                    this.$emit('after-read', {file, name});
                 }
             });
         },
         deleteItem(event) {
-            const { index } = event.currentTarget.dataset;
-            this.$emit('delete', { index, name: this.data.name });
+            const {index} = event.currentTarget.dataset;
+            this.$emit('delete', {index, name: this.data.name});
         },
         doPreviewImage(event) {
             if (!this.data.previewFullImage)
@@ -138,12 +137,12 @@ VantComponent({
             const images = this.data.lists
                 .filter(item => item.isImage)
                 .map(item => item.url || item.path);
-            this.$emit('click-preview', { url: curUrl, name: this.data.name });
+            this.$emit('click-preview', {url: curUrl, name: this.data.name});
             wx.previewImage({
                 urls: images,
                 current: curUrl,
                 fail() {
-                    wx.showToast({ title: '预览图片失败', icon: 'none' });
+                    wx.showToast({title: '预览图片失败', icon: 'none'});
                 }
             });
         }

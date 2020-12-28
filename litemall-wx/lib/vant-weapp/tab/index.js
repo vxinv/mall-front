@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     relation: {
         name: 'tabs',
@@ -39,7 +40,7 @@ VantComponent({
             return this.index;
         },
         updateRender(active, parent) {
-            const { data: parentData } = parent;
+            const {data: parentData} = parent;
             this.inited = this.inited || active;
             this.setData({
                 active,

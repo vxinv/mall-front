@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { GREEN } from '../common/color';
+import {VantComponent} from '../common/component';
+import {GREEN} from '../common/color';
+
 const indexList = () => {
     const indexList = [];
     const charCodeOfA = 'A'.charCodeAt(0);
@@ -97,7 +98,7 @@ VantComponent({
                 };
             });
         },
-        setDiffData({ target, data }) {
+        setDiffData({target, data}) {
             const diffData = {};
             Object.keys(data).forEach(key => {
                 if (target.data[key] !== data[key]) {
@@ -115,8 +116,8 @@ VantComponent({
             }));
         },
         getActiveAnchorIndex() {
-            const { children } = this;
-            const { sticky, scrollTop, stickyOffsetTop } = this.data;
+            const {children} = this;
+            const {sticky, scrollTop, stickyOffsetTop} = this.data;
             for (let i = this.children.length - 1; i >= 0; i--) {
                 const preAnchorHeight = i > 0 ? children[i - 1].height : 0;
                 const reachTop = sticky ? preAnchorHeight + stickyOffsetTop : 0;
@@ -127,11 +128,11 @@ VantComponent({
             return -1;
         },
         onScroll() {
-            const { children = [] } = this;
+            const {children = []} = this;
             if (!children.length) {
                 return;
             }
-            const { sticky, stickyOffsetTop, zIndex, highlightColor, scrollTop } = this.data;
+            const {sticky, stickyOffsetTop, zIndex, highlightColor, scrollTop} = this.data;
             const active = this.getActiveAnchorIndex();
             this.setDiffData({
                 target: this,
@@ -169,8 +170,7 @@ VantComponent({
                                 wrapperStyle
                             }
                         });
-                    }
-                    else if (index === active - 1) {
+                    } else if (index === active - 1) {
                         const currentAnchor = children[index];
                         const currentOffsetTop = currentAnchor.top;
                         const targetOffsetTop = index === children.length - 1
@@ -191,8 +191,7 @@ VantComponent({
                                 anchorStyle
                             }
                         });
-                    }
-                    else {
+                    } else {
                         this.setDiffData({
                             target: item,
                             data: {
@@ -215,8 +214,7 @@ VantComponent({
             let index = Math.floor((touch.clientY - this.sidebar.top) / itemHeight);
             if (index < 0) {
                 index = 0;
-            }
-            else if (index > sidebarLength - 1) {
+            } else if (index > sidebarLength - 1) {
                 index = sidebarLength - 1;
             }
             this.scrollToAnchor(index);

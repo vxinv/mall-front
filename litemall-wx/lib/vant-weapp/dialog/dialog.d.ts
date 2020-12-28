@@ -31,8 +31,8 @@ declare type DialogOptions = {
     closeOnClickOverlay?: boolean;
     confirmButtonOpenType?: string;
 };
+
 interface Dialog {
-    (options: DialogOptions): Promise<DialogAction>;
     alert?: (options: DialogOptions) => Promise<DialogAction>;
     confirm?: (options: DialogOptions) => Promise<DialogAction>;
     close?: () => void;
@@ -42,6 +42,9 @@ interface Dialog {
     resetDefaultOptions?: () => void;
     defaultOptions?: DialogOptions;
     currentOptions?: DialogOptions;
+
+    (options: DialogOptions): Promise<DialogAction>;
 }
+
 declare const Dialog: Dialog;
 export default Dialog;

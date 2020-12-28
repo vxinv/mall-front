@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     props: {
         show: Boolean,
@@ -36,7 +37,7 @@ VantComponent({
     },
     methods: {
         onSelect(event) {
-            const { index } = event.currentTarget.dataset;
+            const {index} = event.currentTarget.dataset;
             const item = this.data.actions[index];
             if (item && !item.disabled && !item.loading) {
                 this.$emit('select', item);

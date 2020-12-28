@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     classes: ['title-class'],
     props: {
@@ -24,8 +25,8 @@ VantComponent({
         statusBarHeight: 0
     },
     created() {
-        const { statusBarHeight } = wx.getSystemInfoSync();
-        this.setData({ statusBarHeight });
+        const {statusBarHeight} = wx.getSystemInfoSync();
+        this.setData({statusBarHeight});
     },
     methods: {
         onClickLeft() {

@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     classes: [
         'bar-class',
@@ -41,14 +42,14 @@ VantComponent({
     },
     methods: {
         updatePrice() {
-            const { price, decimalLength } = this.data;
+            const {price, decimalLength} = this.data;
             this.setData({
                 hasPrice: typeof price === 'number',
                 priceStr: (price / 100).toFixed(decimalLength)
             });
         },
         updateTip() {
-            this.setData({ hasTip: typeof this.data.tip === 'string' });
+            this.setData({hasTip: typeof this.data.tip === 'string'});
         },
         onSubmit(event) {
             this.$emit('submit', event.detail);

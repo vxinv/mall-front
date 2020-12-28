@@ -1,6 +1,7 @@
-import { link } from '../mixins/link';
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {link} from '../mixins/link';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     relation: {
         name: 'grid',
@@ -25,8 +26,8 @@ VantComponent({
             if (!this.parent) {
                 return;
             }
-            const { data, children } = this.parent;
-            const { columnNum, border, square, gutter, clickable, center } = data;
+            const {data, children} = this.parent;
+            const {columnNum, border, square, gutter, clickable, center} = data;
             const width = `${100 / columnNum}%`;
             const styleWrapper = [];
             styleWrapper.push(`width: ${width}`);

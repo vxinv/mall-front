@@ -1,9 +1,11 @@
-import { VantComponent } from '../common/component';
-import { isObj } from '../common/utils';
-import { BLUE, WHITE } from '../common/color';
+import {VantComponent} from '../common/component';
+import {isObj} from '../common/utils';
+import {BLUE, WHITE} from '../common/color';
+
 function format(rate) {
     return Math.min(Math.max(rate, 0), 100);
 }
+
 const PERIMETER = 2 * Math.PI;
 const BEGIN_ANGLE = -Math.PI / 2;
 const STEP = 1;
@@ -60,7 +62,7 @@ VantComponent({
         },
         setHoverColor() {
             const context = this.getContext();
-            const { color, size } = this.data;
+            const {color, size} = this.data;
             let hoverColor = color;
             if (isObj(color)) {
                 const LinearColor = context.createLinearGradient(size, 0, 0, 0);
@@ -69,15 +71,15 @@ VantComponent({
                     .map(key => LinearColor.addColorStop(parseFloat(key) / 100, color[key]));
                 hoverColor = LinearColor;
             }
-            this.setData({ hoverColor });
+            this.setData({hoverColor});
         },
         setStyle() {
-            const { size } = this.data;
+            const {size} = this.data;
             const style = `width: ${size}px; height: ${size}px;`;
-            this.setData({ style });
+            this.setData({style});
         },
         presetCanvas(context, strokeStyle, beginAngle, endAngle, fill) {
-            const { strokeWidth, lineCap, clockwise, size } = this.data;
+            const {strokeWidth, lineCap, clockwise, size} = this.data;
             const position = size / 2;
             const radius = position - strokeWidth / 2;
             context.setStrokeStyle(strokeStyle);
@@ -92,11 +94,11 @@ VantComponent({
             }
         },
         renderLayerCircle(context) {
-            const { layerColor, fill } = this.data;
+            const {layerColor, fill} = this.data;
             this.presetCanvas(context, layerColor, 0, PERIMETER, fill);
         },
         renderHoverCircle(context, formatValue) {
-            const { clockwise, hoverColor } = this.data;
+            const {clockwise, hoverColor} = this.data;
             // 结束角度
             const progress = PERIMETER * (formatValue / 100);
             const endAngle = clockwise
@@ -106,7 +108,7 @@ VantComponent({
         },
         drawCircle(currentValue) {
             const context = this.getContext();
-            const { size } = this.data;
+            const {size} = this.data;
             context.clearRect(0, 0, size, size);
             this.renderLayerCircle(context);
             const formatValue = format(currentValue);
@@ -117,7 +119,7 @@ VantComponent({
         },
         reRender() {
             // tofector 动画暂时没有想到好的解决方案
-            const { value, speed } = this.data;
+            const {value, speed} = this.data;
             if (speed <= 0 || speed > 1000) {
                 this.drawCircle(value);
                 return;
@@ -128,13 +130,11 @@ VantComponent({
                 if (this.currentValue !== value) {
                     if (this.currentValue < value) {
                         this.currentValue += STEP;
-                    }
-                    else {
+                    } else {
                         this.currentValue -= STEP;
                     }
                     this.drawCircle(this.currentValue);
-                }
-                else {
+                } else {
                     this.clearInterval();
                 }
             }, 1000 / speed);
@@ -147,7 +147,7 @@ VantComponent({
         }
     },
     created() {
-        const { value } = this.data;
+        const {value} = this.data;
         this.currentValue = value;
         this.drawCircle(value);
     },

@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 let ARRAY = [];
 VantComponent({
     field: true,
@@ -53,7 +54,7 @@ VantComponent({
         itemListData: []
     },
     beforeCreate() {
-        const { windowHeight } = wx.getSystemInfoSync();
+        const {windowHeight} = wx.getSystemInfoSync();
         this.windowHeight = windowHeight;
         this.children = [];
         ARRAY.push(this);
@@ -74,37 +75,35 @@ VantComponent({
         },
         toggleItem(active) {
             this.children.forEach((item, index) => {
-                const { showPopup } = item.data;
+                const {showPopup} = item.data;
                 if (index === active) {
                     item.toggle();
-                }
-                else if (showPopup) {
-                    item.toggle(false, { immediate: true });
+                } else if (showPopup) {
+                    item.toggle(false, {immediate: true});
                 }
             });
         },
         close() {
             this.children.forEach((child) => {
-                child.toggle(false, { immediate: true });
+                child.toggle(false, {immediate: true});
             });
         },
         getChildWrapperStyle() {
-            const { zIndex, direction } = this.data;
+            const {zIndex, direction} = this.data;
             return this.getRect('.van-dropdown-menu').then((rect) => {
-                const { top = 0, bottom = 0 } = rect;
+                const {top = 0, bottom = 0} = rect;
                 const offset = direction === 'down' ? bottom : this.windowHeight - top;
                 let wrapperStyle = `z-index: ${zIndex};`;
                 if (direction === 'down') {
                     wrapperStyle += `top: ${addUnit(offset)};`;
-                }
-                else {
+                } else {
                     wrapperStyle += `bottom: ${addUnit(offset)};`;
                 }
                 return wrapperStyle;
             });
         },
         onTitleTap(event) {
-            const { index } = event.currentTarget.dataset;
+            const {index} = event.currentTarget.dataset;
             const child = this.children[index];
             if (!child.data.disabled) {
                 ARRAY.forEach(menuItem => {

@@ -1,4 +1,3 @@
-var api = require('../config/api.js');
 var app = getApp();
 
 function formatTime(date) {
@@ -23,7 +22,7 @@ function formatNumber(n) {
  * 封封微信的的request
  */
 function request(url, data = {}, method = "GET") {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     wx.request({
       url: url,
       data: data,
@@ -32,11 +31,9 @@ function request(url, data = {}, method = "GET") {
         'Content-Type': 'application/json',
         'X-Litemall-Token': wx.getStorageSync('token')
       },
-      success: function(res) {
-
-        if (res.statusCode == 200) {
-
-          if (res.data.errno == 501) {
+      success: function (res) {
+        if (res.statusCode === 200) {
+          if (res.data.errno === 501) {
             // 清除登录相关内容
             try {
               wx.removeStorageSync('userInfo');
@@ -54,9 +51,8 @@ function request(url, data = {}, method = "GET") {
         } else {
           reject(res.errMsg);
         }
-
       },
-      fail: function(err) {
+      fail: function (err) {
         reject(err)
       }
     })
@@ -64,7 +60,6 @@ function request(url, data = {}, method = "GET") {
 }
 
 function redirect(url) {
-
   //判断页面是否需要登录
   if (false) {
     wx.redirectTo({

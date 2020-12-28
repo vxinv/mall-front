@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     field: true,
     relation: {
@@ -46,7 +47,7 @@ VantComponent({
         },
         updateDataFromParent() {
             if (this.parent) {
-                const { overlay, duration, activeColor, closeOnClickOverlay, direction } = this.parent.data;
+                const {overlay, duration, activeColor, closeOnClickOverlay, direction} = this.parent.data;
                 this.setData({
                     overlay,
                     duration,
@@ -61,12 +62,12 @@ VantComponent({
             this.$emit('close');
         },
         onOptionTap(event) {
-            const { option } = event.currentTarget.dataset;
-            const { value } = option;
+            const {option} = event.currentTarget.dataset;
+            const {value} = option;
             const shouldEmitChange = this.data.value !== value;
-            this.setData({ showPopup: false, value });
+            this.setData({showPopup: false, value});
             setTimeout(() => {
-                this.setData({ showWrapper: false });
+                this.setData({showWrapper: false});
             }, this.data.duration || 0);
             this.rerender();
             if (shouldEmitChange) {
@@ -74,7 +75,7 @@ VantComponent({
             }
         },
         toggle(show, options = {}) {
-            const { showPopup, duration } = this.data;
+            const {showPopup, duration} = this.data;
             if (show == null) {
                 show = !showPopup;
             }
@@ -83,9 +84,9 @@ VantComponent({
             }
             if (!show) {
                 const time = options.immediate ? 0 : duration;
-                this.setData({ transition: !options.immediate, showPopup: show });
+                this.setData({transition: !options.immediate, showPopup: show});
                 setTimeout(() => {
-                    this.setData({ showWrapper: false });
+                    this.setData({showWrapper: false});
                 }, time);
                 this.rerender();
                 return;

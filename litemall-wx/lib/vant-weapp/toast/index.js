@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     props: {
         show: Boolean,
@@ -24,6 +25,7 @@ VantComponent({
     },
     methods: {
         // for prevent touchmove
-        noop() { }
+        noop() {
+        }
     }
 });

@@ -1,8 +1,10 @@
-import { VantComponent } from '../common/component';
-import { pickerProps } from './shared';
+import {VantComponent} from '../common/component';
+import {pickerProps} from './shared';
+
 VantComponent({
     classes: ['active-class', 'toolbar-class', 'column-class'],
-    props: Object.assign(Object.assign({}, pickerProps), { valueKey: {
+    props: Object.assign(Object.assign({}, pickerProps), {
+        valueKey: {
             type: String,
             value: 'text'
         }, toolbarPosition: {
@@ -18,30 +20,32 @@ VantComponent({
                 this.simple = columns.length && !columns[0].values;
                 this.children = this.selectAllComponents('.van-picker__column');
                 if (Array.isArray(this.children) && this.children.length) {
-                    this.setColumns().catch(() => { });
+                    this.setColumns().catch(() => {
+                    });
                 }
             }
-        } }),
+        }
+    }),
     beforeCreate() {
         this.children = [];
     },
     methods: {
-        noop() { },
+        noop() {
+        },
         setColumns() {
-            const { data } = this;
-            const columns = this.simple ? [{ values: data.columns }] : data.columns;
+            const {data} = this;
+            const columns = this.simple ? [{values: data.columns}] : data.columns;
             const stack = columns.map((column, index) => this.setColumnValues(index, column.values));
             return Promise.all(stack);
         },
         emit(event) {
-            const { type } = event.currentTarget.dataset;
+            const {type} = event.currentTarget.dataset;
             if (this.simple) {
                 this.$emit(type, {
                     value: this.getColumnValue(0),
                     index: this.getColumnIndex(0)
                 });
-            }
-            else {
+            } else {
                 this.$emit(type, {
                     value: this.getValues(),
                     index: this.getIndexes()
@@ -55,8 +59,7 @@ VantComponent({
                     value: this.getColumnValue(0),
                     index: this.getColumnIndex(0)
                 });
-            }
-            else {
+            } else {
                 this.$emit('change', {
                     picker: this,
                     value: this.getValues(),
@@ -107,7 +110,7 @@ VantComponent({
             if (isSame) {
                 return Promise.resolve();
             }
-            return column.set({ options }).then(() => {
+            return column.set({options}).then(() => {
                 if (needReset) {
                     column.setIndex(0);
                 }

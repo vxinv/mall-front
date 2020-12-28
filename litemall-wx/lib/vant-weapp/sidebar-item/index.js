@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     classes: [
         'active-class',
@@ -19,7 +20,7 @@ VantComponent({
     },
     methods: {
         onClick() {
-            const { parent } = this;
+            const {parent} = this;
             if (!parent || this.data.disabled) {
                 return;
             }
@@ -30,7 +31,7 @@ VantComponent({
             });
         },
         setActive(selected) {
-            return this.setData({ selected });
+            return this.setData({selected});
         }
     }
 });

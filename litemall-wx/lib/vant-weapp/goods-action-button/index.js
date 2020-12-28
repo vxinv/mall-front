@@ -1,7 +1,8 @@
-import { VantComponent } from '../common/component';
-import { link } from '../mixins/link';
-import { button } from '../mixins/button';
-import { openType } from '../mixins/open-type';
+import {VantComponent} from '../common/component';
+import {link} from '../mixins/link';
+import {button} from '../mixins/button';
+import {openType} from '../mixins/open-type';
+
 VantComponent({
     mixins: [link, button, openType],
     relation: {
@@ -30,7 +31,7 @@ VantComponent({
             this.jumpLink();
         },
         updateStyle() {
-            const { children = [] } = this.parent;
+            const {children = []} = this.parent;
             const index = children.indexOf(this);
             this.setData({
                 isFirst: index === 0,

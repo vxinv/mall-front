@@ -1,8 +1,9 @@
-import { VantComponent } from '../common/component';
-import { button } from '../mixins/button';
-import { openType } from '../mixins/open-type';
-import { addUnit } from '../common/utils';
-import { GRAY, BLUE } from '../common/color';
+import {VantComponent} from '../common/component';
+import {button} from '../mixins/button';
+import {openType} from '../mixins/open-type';
+import {addUnit} from '../common/utils';
+import {BLUE, GRAY} from '../common/color';
+
 VantComponent({
     mixins: [button, openType],
     props: {
@@ -104,7 +105,7 @@ VantComponent({
             }
             this.$emit('close', action);
             // 把 dialog 实例传递出去，可以通过 stopLoading() 在外部关闭按钮的 loading
-            this.$emit(action, { dialog: this });
+            this.$emit(action, {dialog: this});
             const callback = this.data[action === 'confirm' ? 'onConfirm' : 'onCancel'];
             if (callback) {
                 callback(this);

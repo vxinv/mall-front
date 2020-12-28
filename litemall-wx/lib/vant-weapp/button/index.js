@@ -1,6 +1,7 @@
-import { VantComponent } from '../common/component';
-import { button } from '../mixins/button';
-import { openType } from '../mixins/open-type';
+import {VantComponent} from '../common/component';
+import {button} from '../mixins/button';
+import {openType} from '../mixins/open-type';
+
 VantComponent({
     mixins: [button, openType],
     classes: ['hover-class', 'loading-class'],
@@ -47,13 +48,12 @@ VantComponent({
                     // hide border when color is linear-gradient
                     if (color.indexOf('gradient') !== -1) {
                         style += 'border: 0;';
-                    }
-                    else {
+                    } else {
                         style += `border-color: ${color};`;
                     }
                 }
                 if (style !== this.data.style) {
-                    this.setData({ style });
+                    this.setData({style});
                 }
             }
         }

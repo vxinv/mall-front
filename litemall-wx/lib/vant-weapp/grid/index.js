@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     relation: {
         name: 'grid-item',
@@ -45,7 +46,7 @@ VantComponent({
         this.children = [];
     },
     created() {
-        const { gutter } = this.data;
+        const {gutter} = this.data;
         if (gutter) {
             this.setData({
                 style: `padding-left: ${addUnit(gutter)}`

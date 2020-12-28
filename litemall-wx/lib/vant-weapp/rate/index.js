@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { addUnit } from '../common/utils';
+import {VantComponent} from '../common/component';
+import {addUnit} from '../common/utils';
+
 VantComponent({
     field: true,
     classes: ['icon-class'],
@@ -53,7 +54,7 @@ VantComponent({
     watch: {
         value(value) {
             if (value !== this.data.innerValue) {
-                this.setData({ innerValue: value });
+                this.setData({innerValue: value});
             }
         }
     },
@@ -69,25 +70,25 @@ VantComponent({
             });
         },
         onSelect(event) {
-            const { data } = this;
-            const { score } = event.currentTarget.dataset;
+            const {data} = this;
+            const {score} = event.currentTarget.dataset;
             if (!data.disabled && !data.readonly) {
-                this.setData({ innerValue: score + 1 });
+                this.setData({innerValue: score + 1});
                 this.$emit('input', score + 1);
                 this.$emit('change', score + 1);
             }
         },
         onTouchMove(event) {
-            const { touchable } = this.data;
+            const {touchable} = this.data;
             if (!touchable)
                 return;
-            const { clientX } = event.touches[0];
+            const {clientX} = event.touches[0];
             this.getRect('.van-rate__icon', true).then((list) => {
                 const target = list
                     .sort(item => item.right - item.left)
                     .find(item => clientX >= item.left && clientX <= item.right);
                 if (target != null) {
-                    this.onSelect(Object.assign(Object.assign({}, event), { currentTarget: target }));
+                    this.onSelect(Object.assign(Object.assign({}, event), {currentTarget: target}));
                 }
             });
         }

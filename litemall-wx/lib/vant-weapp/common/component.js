@@ -1,5 +1,6 @@
-import { basic } from '../mixins/basic';
-import { observe } from '../mixins/observer/index';
+import {basic} from '../mixins/basic';
+import {observe} from '../mixins/observer/index';
+
 function mapKeys(source, target, map) {
     Object.keys(map).forEach(key => {
         if (source[key]) {
@@ -7,6 +8,7 @@ function mapKeys(source, target, map) {
         }
     });
 }
+
 function VantComponent(vantOptions = {}) {
     const options = {};
     mapKeys(vantOptions, options, {
@@ -21,7 +23,7 @@ function VantComponent(vantOptions = {}) {
         destroyed: 'detached',
         classes: 'externalClasses'
     });
-    const { relation } = vantOptions;
+    const {relation} = vantOptions;
     if (relation) {
         options.relations = Object.assign(options.relations || {}, {
             [`../${relation.name}/index`]: relation
@@ -45,4 +47,5 @@ function VantComponent(vantOptions = {}) {
     observe(vantOptions, options);
     Component(options);
 }
-export { VantComponent };
+
+export {VantComponent};

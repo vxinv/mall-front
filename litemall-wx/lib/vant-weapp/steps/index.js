@@ -1,5 +1,6 @@
-import { VantComponent } from '../common/component';
-import { GREEN } from '../common/color';
+import {VantComponent} from '../common/component';
+import {GREEN} from '../common/color';
+
 VantComponent({
     props: {
         icon: String,

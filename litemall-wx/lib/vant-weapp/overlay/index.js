@@ -1,4 +1,5 @@
-import { VantComponent } from '../common/component';
+import {VantComponent} from '../common/component';
+
 VantComponent({
     props: {
         show: Boolean,
@@ -17,6 +18,7 @@ VantComponent({
             this.$emit('click');
         },
         // for prevent touchmove
-        noop() { }
+        noop() {
+        }
     }
 });
